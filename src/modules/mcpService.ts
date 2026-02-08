@@ -79,10 +79,7 @@ export class MCPService {
 
       // 设置异步监听器
       this.serverSocket.asyncListen({
-        onSocketAccepted: (
-          socket: any,
-          transport: any,
-        ) => {
+        onSocketAccepted: (socket: any, transport: any) => {
           this.handleConnection(transport);
         },
         onStopListening: (socket: any, status: any) => {
@@ -360,7 +357,7 @@ export class MCPService {
 
     // 设置笔记内容和标签
     (note as any).setNote(newContent);
-    
+
     // 添加 AI-Generated 标签
     const tags = (note as any).getTags?.() || [];
     const hasTag = tags.some((t: any) => t.tag === "AI-Generated");
@@ -422,9 +419,12 @@ export class MCPService {
     try {
       // 在所有库中搜索
       const libraries = Zotero.Libraries.getAll();
-      
+
       for (const library of libraries) {
-        const item = Zotero.Items.getByLibraryAndKey(library.libraryID, itemKey);
+        const item = Zotero.Items.getByLibraryAndKey(
+          library.libraryID,
+          itemKey,
+        );
         if (item) {
           return item;
         }

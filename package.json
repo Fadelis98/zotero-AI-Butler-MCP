@@ -28,6 +28,7 @@
     "release": "zotero-plugin release",
     "pretest": "node ./scripts/gen-env-setup.mjs",
     "test": "zotero-plugin test",
+    "test:mcp": "node ./scripts/test-mcp-client.js",
     "scaffold:provider": "node ./scripts/create-provider.mjs",
     "update-deps": "npm update --save"
   },
