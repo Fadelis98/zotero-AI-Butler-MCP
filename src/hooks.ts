@@ -28,6 +28,7 @@ import { createZToolkit } from "./utils/ztoolkit";
 import { TaskQueueManager } from "./modules/taskQueue";
 import { MainWindow } from "./modules/views/MainWindow";
 import { AutoScanManager } from "./modules/autoScanManager";
+import { MCPService } from "./modules/mcpService";
 import { config } from "../package.json";
 import { getPref, setPref } from "./utils/prefs";
 import {
@@ -87,6 +88,17 @@ async function onStartup() {
   // 启动自动扫描管理器
   const autoScanManager = AutoScanManager.getInstance();
   autoScanManager.start();
+
+  // 启动 MCP 服务
+  // 在 localhost 上暴露 JSON-RPC 接口，允许外部通过 MCP 访问 Zotero 数据
+  try {
+    const mcpService = new MCPService();
+    await mcpService.start();
+    // 保存 MCP 服务实例以便在关闭时停止
+    addon.data.mcpService = mcpService;
+  } catch (error) {
+    ztoolkit.log("[AI-Butler] 启动 MCP 服务失败:", error);
+  }
 
   // 标记插件初始化完成
   // 某些功能依赖此标志来判断插件是否已准备好
@@ -1009,6 +1021,15 @@ async function onMainWindowUnload(win: Window): Promise<void> {
  * - 需要重启 Zotero 才能重新加载插件
  */
 function onShutdown(): void {
+  // 停止 MCP 服务
+  if (addon.data.mcpService) {
+    try {
+      addon.data.mcpService.stop();
+    } catch (error) {
+      ztoolkit.log("[AI-Butler] 停止 MCP 服务失败:", error);
+    }
+  }
+
   // 注销所有UI组件
   ztoolkit.unregisterAll();
 
