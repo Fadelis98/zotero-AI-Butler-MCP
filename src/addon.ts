@@ -107,6 +107,12 @@ class Addon {
      * 用于创建和管理插件的各种对话框窗口
      */
     dialog?: DialogHelper;
+
+    /**
+     * MCP 服务实例
+     * Model Context Protocol 服务,在 localhost 上暴露 JSON-RPC 接口
+     */
+    mcpService?: any;
   };
 
   /**
