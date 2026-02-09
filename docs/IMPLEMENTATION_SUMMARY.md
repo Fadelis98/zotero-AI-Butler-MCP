@@ -20,16 +20,19 @@ Created a comprehensive MCP service that:
 Four essential tools are available through the MCP service:
 
 #### `get_pdf_content(itemKey: string)`
+
 - Extracts full text content from PDF attachments
 - Returns content length and full text
 - Uses existing PDFExtractor module for reliable extraction
 
 #### `get_ai_summary(itemKey: string)`
+
 - Retrieves AI-generated summary notes
 - Returns note content, key, and modification date
 - Gracefully handles cases where no summary exists
 
 #### `update_ai_summary(itemKey: string, content: string, mode: 'overwrite' | 'append')`
+
 - Creates or updates AI summary notes
 - Supports two modes:
   - **overwrite**: Replaces entire note content
@@ -37,6 +40,7 @@ Four essential tools are available through the MCP service:
 - Automatically tags notes with "AI-Generated" marker
 
 #### `delete_ai_summary(itemKey: string)`
+
 - Removes AI summary notes
 - Returns deletion status and note key
 - Safe operation even if note doesn't exist
@@ -44,28 +48,33 @@ Four essential tools are available through the MCP service:
 ### 3. Integration Points
 
 #### `src/hooks.ts`
+
 - Added MCP service initialization in `onStartup()`
 - Added graceful shutdown in `onShutdown()`
 - Service starts automatically with the plugin
 
 #### `src/addon.ts`
+
 - Added `mcpService` field to addon data type
 - Maintains service instance for lifecycle management
 
 ### 4. Documentation
 
 #### `docs/MCP_SERVICE.md`
+
 - Complete API reference with examples
 - Usage examples with curl commands
 - Error codes and responses
 - Security considerations
 
 #### `scripts/test-mcp-client.js`
+
 - Functional test client demonstrating all tools
 - Node.js script for easy testing
 - Added to npm scripts as `npm run test:mcp`
 
 ### 5. README Updates
+
 - Added MCP service as feature #8 in core features list
 - Linked to detailed documentation
 
@@ -132,11 +141,13 @@ curl -X POST http://localhost:23337 \
 ## Files Modified/Created
 
 ### Created Files
+
 - `src/modules/mcpService.ts` (467 lines)
 - `docs/MCP_SERVICE.md` (232 lines)
 - `scripts/test-mcp-client.js` (186 lines)
 
 ### Modified Files
+
 - `src/hooks.ts` - Added MCP service initialization and shutdown
 - `src/addon.ts` - Added mcpService field to data type
 - `README.md` - Added feature description
@@ -173,10 +184,11 @@ The implementation fully satisfies all requirements from the problem statement:
 ✅ **Requirement 3**: JSON-RPC style interface implemented
 
 ✅ **Requirement 4**: All four required tools implemented:
-   - `get_pdf_content(itemKey: string)` ✓
-   - `get_ai_summary(itemKey: string)` ✓
-   - `update_ai_summary(itemKey: string, content: string, mode: 'overwrite' | 'append')` ✓
-   - `delete_ai_summary(itemKey: string)` ✓
+
+- `get_pdf_content(itemKey: string)` ✓
+- `get_ai_summary(itemKey: string)` ✓
+- `update_ai_summary(itemKey: string, content: string, mode: 'overwrite' | 'append')` ✓
+- `delete_ai_summary(itemKey: string)` ✓
 
 ✅ **Requirement 5**: Uses `nsIServerSocket` for Zotero compatibility
 
