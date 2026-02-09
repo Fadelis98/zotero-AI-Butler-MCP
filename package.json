@@ -12,13 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/steven-jianhao-li/zotero-AI-Butler.git"
+    "url": "git+https://github.com/Fadelis98/zotero-AI-Butler-MCP.git"
   },
   "author": "Steven Jianhao Li",
   "bugs": {
-    "url": "https://github.com/steven-jianhao-li/zotero-AI-Butler/issues"
+    "url": "https://github.com/Fadelis98/zotero-AI-Butler-MCP/issues"
   },
-  "homepage": "https://github.com/steven-jianhao-li/zotero-AI-Butler#readme",
+  "homepage": "https://github.com/Fadelis98/zotero-AI-Butler-MCP#readme",
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "start": "zotero-plugin serve",
